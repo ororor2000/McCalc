@@ -13,7 +13,8 @@ try:
 
     manager = McManager(data)
     
-    
+    a = manager.build_order([1,8,9], 2)
+    x=5
 
 except Exception as err:
     print(err)

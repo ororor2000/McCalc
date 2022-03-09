@@ -35,7 +35,8 @@ class McManager:
 
         for i in range(len(ids)):
             id = ids[i]
-            items.append(lambda x:x.id == id)
+            item = next((x for x in self.menu if x.id == id), None)
+            items.append(item)
         
         return items
     
@@ -53,9 +54,11 @@ class McManager:
             
             prices.append(price)
 
-        return min(prices)
+        min_val = min(prices)
 
-    #0 - regualr, 1 - big, 2/anything else - huge
+        return (prices.index(min_val), min_val)
+
+    #0 - regualr, 1 - big, 2 - huge
     def resolve_meal_size(self, item, meal_size):
         if (meal_size == 0):
             return item.meal_price
@@ -70,9 +73,14 @@ class McManager:
         tuple = self.seperate_sub_type(items)
         full = tuple[0]
         standalone = tuple[1]
-
-        min_price = self.calulate_cheap_full(full, meal_size)
-        min_index = full.index(min_price)
         
-        return { "meal_item": full[min_index], "regular_items": (full.pop(min_index) + standalone)}
+        calcation_tuple = self.calulate_cheap_full(full, meal_size)
+        min_index = calcation_tuple[0]
+        min_price = calcation_tuple[1]
+
+        l = full
+
+        result =  { "meal_item": full[min_index], "regular_items": ([l.pop(min_index)] + standalone)}
+
+        return result
 

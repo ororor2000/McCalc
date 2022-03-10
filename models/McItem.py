@@ -12,5 +12,5 @@ class McItem:
        self.meal_price_huge = meal_price_huge
     
     def to_object(self, obj):
-        return McItem(obj["id"], obj["type"], obj["sub_type"], obj["category"], obj["title"], obj["price"], obj["meal_price"], obj["meal_price_big"], obj["meal_price_huge"])
+        return McItem(id = obj["id"], type = obj["type"], sub_type = obj["sub_type"], category = obj["category"], title = obj["title"], price = obj["price"], meal_price = obj["meal_price"], meal_price_big = obj["meal_price_big"], meal_price_huge = obj["meal_price_huge"])
 

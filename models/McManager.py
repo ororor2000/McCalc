@@ -48,9 +48,9 @@ class McManager:
 
             for j in range(len(full)):
                 if (i == j):
-                    price += self.resolve_meal_size(full[i], meal_size)
+                    price += self.resolve_meal_size(full[j], meal_size)
                 else:
-                    price += full[i].price
+                    price += full[j].price
             
             prices.append(price)
 
@@ -75,12 +75,15 @@ class McManager:
         standalone = tuple[1]
         
         calcation_tuple = self.calulate_cheap_full(full, meal_size)
-        min_index = calcation_tuple[0]
-        min_price = calcation_tuple[1]
+        min_index = calcation_tuple[0]        
+        total_price = calcation_tuple[1]
+
+        for i in range(len(standalone)):
+            total_price += standalone[i].price
 
         l = full
 
-        result =  { "meal_item": full[min_index], "regular_items": ([l.pop(min_index)] + standalone)}
+        result =  { "meal_item": full[min_index], "regular_items": ([l.pop(min_index)] + standalone), "total_price": total_price}
 
         return result
 
